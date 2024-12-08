@@ -1,7 +1,12 @@
-import css from "./HomePage.module.css";
+// import css from "./HomePage.module.css";
+import HeaderReuse from "../../components/ToReuse/HeaderReuse/HeaderReuse";
 
 const HomePage = () => {
-  return <h1 className={css.title}>Home Page</h1>;
+  return (
+    <div>
+      <HeaderReuse />
+    </div>
+  );
 };
 
 export default HomePage;
