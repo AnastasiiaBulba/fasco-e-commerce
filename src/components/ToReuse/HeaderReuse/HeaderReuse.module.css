@@ -75,6 +75,7 @@
   height: fit-content;
   position: relative;
   overflow: hidden;
+  transition: color 0.3s ease, background 0.3s ease;
 }
 
 .navItemBtn::after {
@@ -94,4 +95,35 @@
 .navItemBtn:hover::after {
   transform: scaleX(1);
   transform-origin: left;
+}
+
+.navItemBtn:hover {
+  background: linear-gradient(
+    to right,
+    rgba(224, 224, 224, 0) 0%,
+    #e0e0e0 50%,
+    rgba(224, 224, 224, 0) 100%
+  );
+  color: #000;
+}
+
+.navItemBtn:hover::before {
+  left: 0;
+}
+
+.navItemBtn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(224, 224, 224, 0) 0%,
+    #e0e0e0 50%,
+    rgba(224, 224, 224, 0) 100%
+  );
+  transition: left 0.5s ease;
+  z-index: -1;
 }
