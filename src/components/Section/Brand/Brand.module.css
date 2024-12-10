@@ -1,0 +1,24 @@
+.brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.brandCarousel {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.brandTrack {
+  display: flex;
+  align-items: center;
+}
+
+.brandImg {
+  flex: 0 0 auto;
+  width: 196px;
+  object-fit: contain;
+  margin: 0 20px;
+}
