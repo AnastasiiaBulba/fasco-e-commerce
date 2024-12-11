@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import css from "./HeaderReuse.module.css";
+import BurgerMenu from "../../BurgerMenu/BurgerMenu";
 
 const HeaderReuse = () => {
   return (
@@ -29,6 +30,8 @@ const HeaderReuse = () => {
           Sign Up
         </Link>
       </nav>
+
+      <BurgerMenu />
     </header>
   );
 };

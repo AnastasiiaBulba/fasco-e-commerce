@@ -2,6 +2,52 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 150px;
+}
+
+.brandCarousel {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.brandTrack {
+  display: flex;
+  align-items: center;
+}
+
+.brandImg {
+  flex: 0 0 auto;
+  width: 98px;
+  object-fit: contain;
+  margin: 0 10px;
+}
+
+@media (min-width: 768px) {
+  .brand {
+    height: 175px;
+  }
+
+  .brandImg {
+    width: 147px;
+    margin: 0 15px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .brand {
+    height: 200px;
+  }
+
+  .brandImg {
+    width: 196px;
+    margin: 0 20px;
+  }
+}
+/* .brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 200px;
 }
 
@@ -21,4 +67,4 @@
   width: 196px;
   object-fit: contain;
   margin: 0 20px;
-}
+} */
