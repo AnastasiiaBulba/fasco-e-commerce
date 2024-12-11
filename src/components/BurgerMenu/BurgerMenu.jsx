@@ -13,7 +13,7 @@ const BurgerMenu = () => {
   return (
     <>
       <button className={css.burgerButton} onClick={toggleMenu}>
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
+        {isOpen ? <X size={48} /> : <Menu size={48} />}
       </button>
       {isOpen && <MobileMenuModal onClose={toggleMenu} />}
     </>
