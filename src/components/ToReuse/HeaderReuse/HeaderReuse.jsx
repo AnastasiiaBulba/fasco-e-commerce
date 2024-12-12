@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
 import css from "./HeaderReuse.module.css";
 import BurgerMenu from "../../BurgerMenu/BurgerMenu";
 
@@ -14,6 +15,17 @@ const HeaderReuse = () => {
         <Link to="/" className={css.navItem}>
           Home
         </Link>
+
+        {/* Для прикладу. В вайлі секції brand додано id а в HomePage додано Element */}
+        <ScrollLink
+          to="brand"
+          smooth={true}
+          duration={500}
+          className={css.navItem}
+        >
+          Brand
+        </ScrollLink>
+
         <Link to="/deals" className={css.navItem}>
           Deals
         </Link>
