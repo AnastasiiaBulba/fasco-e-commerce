@@ -1,6 +1,7 @@
-import css from "./SingInPage.module.css";
+import css from "./SingUp.module.css";
 import RightContainer from "../../components/Pages/SignInUp/RightContainerSign/RightContainer";
-const SingInPage = () => {
+
+const SingUpPage = () => {
   return (
     <div className={css.overlay}>
       <div className={css.container}>
@@ -14,4 +15,4 @@ const SingInPage = () => {
   );
 };
 
-export default SingInPage;
+export default SingUpPage;
