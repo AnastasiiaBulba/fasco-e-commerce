@@ -5,6 +5,7 @@ import ProductPage from "../pages/ProductPage/ProductPage";
 import CartPage from "../pages/CartPage/CartPage";
 import CheckoutPage from "../pages/CheckoutPage/CheckoutPage";
 import SingInPage from "../pages/SingIn/SingInPage";
+import SingUpPage from "../pages/SingUp/SingUp";
 
 const AppRouter = () => {
   return (
@@ -12,6 +13,7 @@ const AppRouter = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/signin" element={<SingInPage />} />
+        <Route path="/signup" element={<SingUpPage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/product" element={<ProductPage />} />
         <Route path="/cart" element={<CartPage />} />

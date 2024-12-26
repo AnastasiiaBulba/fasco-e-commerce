@@ -1,0 +1,65 @@
+.title {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 66px;
+    line-height: 100%;
+    color: #484848;
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+
+.subtitle {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 133%;
+    color: #000;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.or {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 133%;
+    letter-spacing: 0.08em;
+    color: #838383;
+    margin-bottom: 50px;
+}
+
+.forgotPassword {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 250%;
+    letter-spacing: 0.08em;
+    color: #5b86e5;
+    display: block;
+    text-align: right;
+    cursor: pointer;
+}
+
+.signIn {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 250%;
+    letter-spacing: 0.08em;
+    color: #5b86e5;
+    display: block;
+    cursor: pointer;
+}
+
+.LinkHome {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 250%;
+    letter-spacing: 0.08em;
+    color: #5b86e5;
+    display: block;
+    text-align: right;
+    cursor: pointer;
+}
