@@ -1,0 +1,28 @@
+.button {
+    border: 1px solid #5b86e5;
+    border-radius: 8px;
+    display: flex;
+    gap: 5px;
+    padding: 10px 30px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 20px 35px 0 rgba(0, 0, 0, 0.15);
+    border: 1px solid #5b86e5;
+}
+
+.btnSocial {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 70px;
+}
+
+.text {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 250%;
+    letter-spacing: 0.08em;
+    color: #000;
+}
