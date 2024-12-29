@@ -1,25 +1,50 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-axios.defaults.baseURL = "https://connections-api.goit.global";
-
-const setAuthHeader = (token) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = "";
-};
+import {
+  auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  updateProfile,
+} from "../../Firebase/firebase"; // Импортируем необходимые функции из firebase.js
 
 export const registration = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post("/users/signup", credentials);
-      setAuthHeader(res.data.token);
-      return res.data;
+      const { name, lastName, email, phoneNumber, password } = credentials;
+      console.log("Registration data:", credentials); // Проверим, что данные передаются
+
+      // Регистрация пользователя с email и паролем
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      // Обновление профиля пользователя с дополнительными данными
+      await updateProfile(user, {
+        displayName: name,
+      });
+
+      // Сохранение данных пользователя в Firestore
+      // Если необходимо, добавьте код для записи в Firestore:
+      // const userRef = doc(db, "users", user.uid);
+      // await setDoc(userRef, { name, lastName, email, phoneNumber });
+
+      return {
+        user: {
+          name,
+          lastName,
+          email: user.email,
+          phoneNumber,
+        },
+        token: user.uid,
+      };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      console.error("Registration error:", error.message); // Отладка
+      return thunkAPI.rejectWithValue(error.message); // Обработка ошибок
     }
   }
 );
@@ -28,9 +53,16 @@ export const login = createAsyncThunk(
   "auth/login",
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post("/users/login", credentials);
-      setAuthHeader(res.data.token);
-      return res.data;
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        credentials.email,
+        credentials.password
+      );
+      const user = userCredential.user;
+      return {
+        user: { name: user.displayName, email: user.email },
+        token: user.uid,
+      }; // Получаем токен (UID)
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -39,8 +71,8 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
-    await axios.post("/users/logout");
-    clearAuthHeader();
+    await signOut(auth);
+    return {}; // Логинизация не требуется, просто очищаем токен и состояние
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
@@ -48,25 +80,22 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 
 export const refreshUser = createAsyncThunk(
   "auth/refresh",
-  async (_, thunkApi) => {
-    const state = thunkApi.getState();
-    const persistedToken = state.auth.token;
-
-    if (!persistedToken) {
-      return thunkApi.rejectWithValue("No token found");
-    }
-
+  async (_, thunkAPI) => {
     try {
-      setAuthHeader(persistedToken);
-      console.log("Token being sent:", persistedToken);
-
-      const response = await axios("/users/current");
-      return response.data;
-    } catch (e) {
-      console.error("Refresh error:", e.response?.data || e.message);
-      const errorMessage =
-        e.response?.data?.message || "Unable to refresh user";
-      return thunkApi.rejectWithValue(errorMessage);
+      return new Promise((resolve, reject) => {
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            resolve({
+              user: { name: user.displayName, email: user.email },
+              token: user.uid,
+            });
+          } else {
+            reject("No user found");
+          }
+        });
+      });
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

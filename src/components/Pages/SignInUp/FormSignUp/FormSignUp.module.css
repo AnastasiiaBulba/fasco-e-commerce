@@ -56,3 +56,9 @@
     background-color: #5b86e5;
     color: #fff;
 }
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}

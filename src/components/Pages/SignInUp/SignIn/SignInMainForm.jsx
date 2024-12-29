@@ -1,6 +1,9 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
 import css from "./SignInMainForm.module.css";
+import { useDispatch } from "react-redux";
+import { login } from "../../../../redux/Auth/operations";
+import { Link } from "react-router-dom";
 
 const validationSchema = yup.object({
   email: yup
@@ -14,6 +17,7 @@ const validationSchema = yup.object({
 });
 
 const SignInMainForm = () => {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -24,10 +28,14 @@ const SignInMainForm = () => {
       alert(JSON.stringify(values, null, 2));
     },
   });
+  const handleSubmit = (values, { resetForm }) => {
+    dispatch(login(values));
+    resetForm();
+  };
 
   return (
     <div className={css.containerForm}>
-      <form className={css.form} onSubmit={formik.handleSubmit}>
+      <form className={css.form} onSubmit={handleSubmit}>
         <input
           className={css.input}
           id="email"
@@ -37,6 +45,7 @@ const SignInMainForm = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           placeholder="Email"
+          required
         />
         <input
           className={css.input}
@@ -48,12 +57,16 @@ const SignInMainForm = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           placeholder="Password"
+          required
         />
         <button className={css.button} type="submit">
           Submit
         </button>
         <button className={css.button} type="button">
-          Registration Now
+          <Link to="/signup" className={css.Link}>
+            {" "}
+            Registration Now
+          </Link>
         </button>
       </form>
     </div>
