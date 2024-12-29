@@ -9,6 +9,7 @@ const HomePage = () => {
     <div>
       <HeaderReuse />
       <Hero />
+
       <Element name="brand">
         <Brand />
       </Element>
