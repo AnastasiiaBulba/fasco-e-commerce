@@ -1,4 +1,4 @@
-import SignInMainForm from "../SignInMainForm";
+import SignInMainForm from "../SignIn/SignInMainForm";
 import FormSignUp from "../FormSignUp/FormSignUp";
 import BtnSocial from "../BtnSocial/BtnSocial";
 import css from "./RightContainer.module.css";
