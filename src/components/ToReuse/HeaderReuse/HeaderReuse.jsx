@@ -11,6 +11,7 @@ const HeaderReuse = () => {
           <span className={css.logoText}>FASCO</span>
         </Link>
       </div>
+
       <nav className={css.navigation}>
         <Link to="/" className={css.navItem}>
           Home
