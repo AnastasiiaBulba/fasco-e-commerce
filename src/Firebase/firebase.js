@@ -12,15 +12,15 @@ import {
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// Конфигурация Firebase
+// Конфигурация Firebase из переменных окружения
 const firebaseConfig = {
-  apiKey: "AIzaSyDzvY0FAKsATbLC_naqj3tMYIQISpvTbGI",
-  authDomain: "fasko-aa017.firebaseapp.com",
-  projectId: "fasko-aa017",
-  storageBucket: "fasko-aa017.appspot.com", // Исправлено
-  messagingSenderId: "787505323926",
-  appId: "1:787505323926:web:fb5160347c5cdfb47a07b7",
-  measurementId: "G-YMBK0S4KCB",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 // Инициализация Firebase
