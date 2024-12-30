@@ -2,8 +2,10 @@ import css from "./Deals.module.css";
 import DealsTimer from "./DealsTimer";
 
 const Deals = () => {
+  const targetDate = "2025-03-25T23:59:59";
+
   return (
-    <section className={css.deals}>
+    <section id="deals" className={css.deals}>
       <div className={css.wrapper}>
         <h2 className={css.title}>Deals Of The Month</h2>
         <p className={css.description}>
@@ -12,7 +14,7 @@ const Deals = () => {
           sollicitudin
         </p>
         <button className={css.btn}>Buy Now</button>
-        <DealsTimer />
+        <DealsTimer targetDate={targetDate} />
       </div>
       <div className={css.wrapperPhoto}></div>
     </section>

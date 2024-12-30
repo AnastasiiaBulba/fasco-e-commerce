@@ -3,7 +3,7 @@ import BrandCarousel from "./BrandCarousel";
 
 const Brand = () => {
   return (
-    <section id="brand" className={css.brand}>
+    <section className={css.brand}>
       <BrandCarousel />
     </section>
   );

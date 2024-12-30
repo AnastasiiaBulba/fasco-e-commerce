@@ -17,19 +17,20 @@ const HeaderReuse = () => {
           Home
         </Link>
 
-        {/* Для прикладу. В вайлі секції brand додано id а в HomePage додано Element */}
+        {/* <Link to="/deals" className={css.navItem}>
+          Deals
+        </Link> */}
+
+        {/*В файлі секції deals додано id а в HomePage додано Element */}
         <ScrollLink
-          to="brand"
+          to="deals"
           smooth={true}
           duration={500}
           className={css.navItem}
         >
-          Brand
+          Deals
         </ScrollLink>
 
-        <Link to="/deals" className={css.navItem}>
-          Deals
-        </Link>
         <Link to="/new-arrivals" className={css.navItem}>
           New Arrivals
         </Link>

@@ -10,10 +10,11 @@ const HomePage = () => {
     <div>
       <HeaderReuse />
       <Hero />
-      <Element name="brand">
-        <Brand />
+      <Brand />
+
+      <Element name="deals">
+        <Deals />
       </Element>
-      <Deals />
     </div>
   );
 };
