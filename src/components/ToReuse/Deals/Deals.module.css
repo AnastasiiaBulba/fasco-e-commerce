@@ -1,9 +1,15 @@
 .deals {
+  background: rgba(255, 255, 0, 0.329);
+}
+
+.container {
+  max-width: 1281px;
+  padding: 0;
+  margin: 0 auto;
 }
 
 .wrapper {
   width: 444px;
-  height: 582px;
 }
 
 .title {
@@ -11,6 +17,9 @@
   font-weight: 400;
   font-size: 46px;
   color: #484848;
+  text-align: left;
+  padding-bottom: 20px;
+  padding-top: 155px;
 }
 
 .description {
@@ -19,6 +28,8 @@
   font-size: 16px;
   line-height: 1.625;
   color: #8a8a8a;
+  text-align: left;
+  padding-bottom: 40px;
 }
 
 .btn {
@@ -34,6 +45,8 @@
   position: relative;
   overflow: hidden;
   z-index: 1;
+  margin-left: 0;
+  margin-bottom: 50px;
 }
 
 .btn::before {

@@ -6,17 +6,19 @@ const Deals = () => {
 
   return (
     <section id="deals" className={css.deals}>
-      <div className={css.wrapper}>
-        <h2 className={css.title}>Deals Of The Month</h2>
-        <p className={css.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque
-          duis ultrices sollicitudin aliquam sem. Scelerisque duis ultrices
-          sollicitudin
-        </p>
-        <button className={css.btn}>Buy Now</button>
-        <DealsTimer targetDate={targetDate} />
+      <div className={css.container}>
+        <div className={css.wrapper}>
+          <h2 className={css.title}>Deals Of The Month</h2>
+          <p className={css.description}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque
+            duis ultrices sollicitudin aliquam sem. Scelerisque duis ultrices
+            sollicitudin
+          </p>
+          <button className={css.btn}>Buy Now</button>
+          <DealsTimer targetDate={targetDate} />
+        </div>
+        <div className={css.wrapperPhoto}></div>
       </div>
-      <div className={css.wrapperPhoto}></div>
     </section>
   );
 };
