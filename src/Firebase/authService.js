@@ -4,57 +4,31 @@ import {
   signInWithRedirect,
   getRedirectResult,
 } from "firebase/auth";
-import { auth, db } from "./firebase"; // импортируем auth и db из вашего firebase.js
-import { doc, setDoc } from "firebase/firestore"; // импортируем Firestore функции для записи
+import { auth } from "./index"; // Импортируем auth из index.js для использования
 
-// Провайдеры для Google и GitHub
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
 
-// Функция для регистрации через Google
-const signInWithGoogle = async () => {
+// Функция для обработки редиректа при входе
+export const handleRedirectResult = async () => {
   try {
-    // Пытаемся выполнить редирект на Google
-    await signInWithRedirect(auth, googleProvider);
-  } catch (error) {
-    console.error("Google sign-in error: ", error.code, error.message);
-  }
-};
-
-// Функция для регистрации через GitHub
-const signInWithGitHub = async () => {
-  try {
-    // Пытаемся выполнить редирект на GitHub
-    await signInWithRedirect(auth, githubProvider);
-  } catch (error) {
-    console.error("GitHub sign-in error: ", error.code, error.message);
-  }
-};
-
-// Функция для обработки результата после редиректа
-const handleRedirectResult = async () => {
-  try {
-    // Получаем результат редиректа
     const result = await getRedirectResult(auth);
     if (result) {
-      const user = result.user;
-
-      // Создаем ссылку на пользователя в Firestore
-      const userRef = doc(db, "users", user.uid);
-
-      // Сохраняем информацию о пользователе в Firestore
-      await setDoc(userRef, {
-        name: user.displayName,
-        email: user.email,
-        photoURL: user.photoURL, // Сохраняем ссылку на фото профиля (если есть)
-      });
-
-      console.log("User info saved:", user);
+      const user = result.user; // Получаем информацию о пользователе после редиректа
+      console.log("User info after redirect:", user);
+      return user; // Возвращаем пользователя или обновляем состояние в Redux
     }
   } catch (error) {
-    console.error("Error handling redirect result:", error.message);
+    console.error("Error handling redirect result:", error);
   }
 };
 
-// Экспортируем функции для использования в компонентах
-export { signInWithGoogle, signInWithGitHub, handleRedirectResult };
+// Логин через Google
+export const signInWithGoogle = () => {
+  signInWithRedirect(auth, googleProvider);
+};
+
+// Логин через GitHub
+export const signInWithGitHub = () => {
+  signInWithRedirect(auth, githubProvider);
+};

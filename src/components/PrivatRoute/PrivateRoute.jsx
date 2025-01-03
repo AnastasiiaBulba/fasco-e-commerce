@@ -1,10 +1,10 @@
 import { Navigate } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../Firebase/firebase"; // импортируем auth из Firebase
+import { useSelector } from "react-redux";
 import { RotatingLines } from "react-loader-spinner";
 
+// Компонент, который проверяет авторизацию и отображает либо страницу, либо редирект на страницу входа
 const PrivateRoute = ({ element }) => {
-  const [user, loading] = useAuthState(auth);
+  const { user, loading } = useSelector((state) => state.auth); // Получаем данные пользователя и состояние загрузки из Redux
 
   if (loading) {
     return (
@@ -17,19 +17,16 @@ const PrivateRoute = ({ element }) => {
           strokeWidth="5"
           animationDuration="0.75"
           ariaLabel="rotating-lines-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
         />
       </div>
     );
   }
 
   if (!user) {
-    return <Navigate to="/signin" />;
+    return <Navigate to="/signin" />; // Если пользователь не авторизован, редирект на страницу входа
   }
 
-  return element;
+  return element; // Если пользователь авторизован, показываем защищённую страницу
 };
 
 export default PrivateRoute;
-/*test*/

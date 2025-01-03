@@ -1,8 +1,9 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import css from "./FormSignUp.module.css";
-import { registration } from "../../../../redux/Auth/operations";
+import { registerWithEmail } from "../../../../redux/Auth/operations";
 import { useDispatch } from "react-redux";
+import { setLoading } from "../../../../redux/Auth/slice";
 
 const FormSignUp = () => {
   const validationSchema = Yup.object({
@@ -34,9 +35,20 @@ const FormSignUp = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
+    dispatch(setLoading(true)); /*
+
     console.log("Form values:", values);
-    dispatch(registration(values));
-    resetForm();
+    dispatch(registerWithEmail(values));
+    resetForm();*/
+    try {
+      dispatch(registerWithEmail(values.email, values.password));
+      resetForm();
+      console.log("Registration successful");
+    } catch (error) {
+      console.log("Error:", error);
+    } finally {
+      dispatch(setLoading(false));
+    }
   };
 
   return (

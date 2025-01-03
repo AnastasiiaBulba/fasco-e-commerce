@@ -6,6 +6,7 @@ import CartPage from "../pages/CartPage/CartPage";
 import CheckoutPage from "../pages/CheckoutPage/CheckoutPage";
 import SingInPage from "../pages/SingIn/SingInPage";
 import SingUpPage from "../pages/SingUp/SingUp";
+import PrivateRoute from "../components/PrivatRoute/PrivateRoute";
 
 const AppRouter = () => {
   return (
@@ -14,10 +15,18 @@ const AppRouter = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/signin" element={<SingInPage />} />
         <Route path="/signup" element={<SingUpPage />} />
-        <Route path="/shop" element={<ShopPage />} />
-        <Route path="/product" element={<ProductPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/shop" element={<PrivateRoute element={<ShopPage />} />} />
+
+        <Route path="/home" element={<PrivateRoute element={<HomePage />} />} />
+        <Route
+          path="/product"
+          element={<PrivateRoute element={<ProductPage />} />}
+        />
+        <Route path="/cart" element={<PrivateRoute element={<CartPage />} />} />
+        <Route
+          path="/checkout"
+          element={<PrivateRoute element={<CheckoutPage />} />}
+        />
       </Routes>
     </Router>
   );
