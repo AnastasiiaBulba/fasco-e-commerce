@@ -10,14 +10,17 @@ import { setUser, setLoading, setError, clearUser } from "./slice";
 
 const db = getFirestore();
 
-// Логин через Email/Password
 export const loginWithEmail = (email, password) => async (dispatch) => {
   dispatch(setLoading(true));
-  if (!email || !password) {
-    dispatch(setError("Email and password are required"));
-    dispatch(setLoading(false));
-    return;
-  }
+
+  // Логируем email и пароль для отладки
+  console.log(
+    "Attempting to log in with email:",
+    email,
+    "and password:",
+    password
+  );
+
   try {
     const userCredential = await signInWithEmailAndPassword(
       auth,
@@ -26,25 +29,47 @@ export const loginWithEmail = (email, password) => async (dispatch) => {
     );
     dispatch(setUser(userCredential.user));
   } catch (error) {
-    dispatch(setError(error.message));
+    console.error("Error during sign-in:", error.code, error.message);
+
+    switch (error.code) {
+      case "auth/invalid-email":
+        dispatch(setError("The email address is badly formatted."));
+        break;
+      case "auth/user-disabled":
+        dispatch(setError("The user account has been disabled."));
+        break;
+      case "auth/user-not-found":
+        dispatch(setError("No user found with this email."));
+        break;
+      case "auth/wrong-password":
+        dispatch(setError("Incorrect password."));
+        break;
+      case "auth/invalid-credential":
+        dispatch(
+          setError(
+            "Invalid credentials provided. Please check your email and password."
+          )
+        );
+        break;
+      default:
+        dispatch(setError("An unknown error occurred: " + error.message));
+        break;
+    }
   } finally {
     dispatch(setLoading(false));
   }
 };
 
-// Регистрация через Email/Password
 export const registerWithEmail = (email, password) => async (dispatch) => {
   dispatch(setLoading(true));
 
   if (!email || !password) {
-    // Используем  для проверки
     dispatch(setError("Email and password are required"));
     dispatch(setLoading(false));
     return;
   }
 
   try {
-    // Регистрируем пользователя с помощью email и password
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -52,12 +77,13 @@ export const registerWithEmail = (email, password) => async (dispatch) => {
     );
     const user = userCredential.user;
 
-    // Создаем запись в Firestore с данными пользователя
+    // Дополнительно, сохраняем или обновляем данные в Firestore
     await setDoc(doc(db, "users", user.uid), {
       email: user.email,
-      displayName: "Default Name", // Можете изменить на имя пользователя
-      phoneNumber: "", // Можете добавить телефонный номер
-      // Добавьте любые другие поля, которые хотите сохранить в Firestore
+      displayName: "Default Name",
+      phoneNumber: "",
+    }).catch((firestoreError) => {
+      dispatch(setError(`Firestore Error: ${firestoreError.message}`));
     });
 
     // Диспатчим успешную регистрацию в Redux
@@ -89,14 +115,12 @@ export const loginWithGoogle = () => async (dispatch) => {
   }
 };
 
-// Логин через GitHub
 export const loginWithGitHub = () => async (dispatch) => {
   dispatch(setLoading(true));
   try {
     const userCredential = await signInWithPopup(auth, githubProvider);
     dispatch(setUser(userCredential.user));
 
-    // Дополнительно, сохраняем или обновляем данные в Firestore
     await setDoc(doc(db, "users", userCredential.user.uid), {
       email: userCredential.user.email,
       displayName: userCredential.user.displayName || "Default Name",
@@ -109,7 +133,6 @@ export const loginWithGitHub = () => async (dispatch) => {
   }
 };
 
-// Логаут
 export const logout = () => async (dispatch) => {
   dispatch(setLoading(true));
   try {
