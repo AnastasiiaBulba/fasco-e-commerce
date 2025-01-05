@@ -1,15 +1,18 @@
-import { useDispatch } from "react-redux";
-import { logout } from "../../features/authSlice"; // Импортируем action logout
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearUser } from "../../../../redux/Auth/slice";
 
-const handleLogout = () => {
+function Logout() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const logoutUser = () => {
-    dispatch(logout()); // Сбрасываем авторизацию
-    navigate("/"); // Перенаправляем на главную
-  };
+  useEffect(() => {
+    dispatch(clearUser());
+    navigate("/");
+  }, [dispatch, navigate]);
 
-  return <button onClick={logoutUser}>Logout</button>;
-};
+  return <div>Выполняется выход...</div>;
+}
+
+export default Logout;

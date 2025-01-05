@@ -14,7 +14,6 @@ const db = getFirestore();
 export const loginWithEmail = (email, password) => async (dispatch) => {
   dispatch(setLoading(true));
   if (!email || !password) {
-    // Используем  для проверки
     dispatch(setError("Email and password are required"));
     dispatch(setLoading(false));
     return;

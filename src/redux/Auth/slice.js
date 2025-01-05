@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: null,
-  isAuthenticated: false, // Поставим false по умолчанию
+  isAuthenticated: false,
   loading: false,
   error: null,
 };
@@ -30,3 +30,6 @@ const authSlice = createSlice({
 
 export const { setUser, clearUser, setLoading, setError } = authSlice.actions;
 export default authSlice.reducer;
+export const selectUser = (state) => state.auth.user;
+export const selectLoading = (state) => state.auth.loading;
+export const selectError = (state) => state.auth.error;

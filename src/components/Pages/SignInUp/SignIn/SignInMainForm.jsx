@@ -18,7 +18,7 @@ const validationSchema = yup.object({
 
 const SignInMainForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Инициализация navigate для редиректа
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -26,16 +26,16 @@ const SignInMainForm = () => {
       password: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values, { resetForm }) => {
-      dispatch(loginWithEmail(values)) // Отправка данных в Redux через dispatch
-        .then(() => {
-          // После успешного логина или регистрации редиректим на страницу Home
-          navigate("/");
-        })
-        .catch((error) => {
-          console.error("Login failed", error);
-        });
-      resetForm(); // Сброс формы
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const { email, password } = values;
+        await dispatch(loginWithEmail(email, password));
+        navigate("/");
+        resetForm();
+      } catch (error) {
+        console.error("Login failed:", error);
+        alert("Invalid credentials. Please try again.");
+      }
     },
   });
 

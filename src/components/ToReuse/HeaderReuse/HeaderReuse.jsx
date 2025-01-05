@@ -6,7 +6,7 @@ import css from "./HeaderReuse.module.css";
 import BurgerMenu from "../../BurgerMenu/BurgerMenu";
 
 const HeaderReuse = () => {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); // Получаем статус авторизации из Redux
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   return (
     <header className={css.header}>

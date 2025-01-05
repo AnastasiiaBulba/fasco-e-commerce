@@ -1,11 +1,16 @@
+import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import css from "./FormSignUp.module.css";
 import { registerWithEmail } from "../../../../redux/Auth/operations";
 import { useDispatch } from "react-redux";
-import { setLoading } from "../../../../redux/Auth/slice";
+import { useNavigate } from "react-router-dom";
 
 const FormSignUp = () => {
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const validationSchema = Yup.object({
     name: Yup.string().required("Name is required"),
     lastName: Yup.string().required("Last Name is required"),
@@ -32,22 +37,18 @@ const FormSignUp = () => {
     confirmPassword: "",
   };
 
-  const dispatch = useDispatch();
-
   const handleSubmit = (values, { resetForm }) => {
-    dispatch(setLoading(true)); /*
+    setLoading(true);
 
-    console.log("Form values:", values);
-    dispatch(registerWithEmail(values));
-    resetForm();*/
     try {
       dispatch(registerWithEmail(values.email, values.password));
       resetForm();
       console.log("Registration successful");
+      navigate("/signin");
     } catch (error) {
       console.log("Error:", error);
     } finally {
-      dispatch(setLoading(false));
+      setLoading(false);
     }
   };
 
@@ -93,7 +94,6 @@ const FormSignUp = () => {
                 component="div"
               />
 
-              {/* Поле телефона */}
               <Field
                 className={css.input}
                 id="phone"
@@ -106,7 +106,6 @@ const FormSignUp = () => {
                 component="div"
               />
 
-              {/* Поле пароля */}
               <Field
                 className={css.input}
                 id="password"
@@ -120,7 +119,6 @@ const FormSignUp = () => {
                 component="div"
               />
 
-              {/* Поле подтверждения пароля */}
               <Field
                 className={css.input}
                 id="confirmPassword"
@@ -135,13 +133,12 @@ const FormSignUp = () => {
               />
             </div>
 
-            {/* Кнопка отправки */}
             <button
               className={css.button}
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || loading}
             >
-              Create Account
+              {loading ? "Creating Account..." : "Create Account"}{" "}
             </button>
           </Form>
         )}
