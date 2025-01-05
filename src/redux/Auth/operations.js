@@ -1,101 +1,123 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { auth, googleProvider, githubProvider } from "../../Firebase/index";
 import {
-  auth,
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signInWithPopup,
   signOut,
-  onAuthStateChanged,
-  updateProfile,
-} from "../../Firebase/firebase"; // Импортируем необходимые функции из firebase.js
+} from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { setUser, setLoading, setError, clearUser } from "./slice";
 
-export const registration = createAsyncThunk(
-  "auth/register",
-  async (credentials, thunkAPI) => {
-    try {
-      const { name, lastName, email, phoneNumber, password } = credentials;
-      console.log("Registration data:", credentials); // Проверим, что данные передаются
+const db = getFirestore();
 
-      // Регистрация пользователя с email и паролем
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredential.user;
-
-      // Обновление профиля пользователя с дополнительными данными
-      await updateProfile(user, {
-        displayName: name,
-      });
-
-      // Сохранение данных пользователя в Firestore
-      // Если необходимо, добавьте код для записи в Firestore:
-      // const userRef = doc(db, "users", user.uid);
-      // await setDoc(userRef, { name, lastName, email, phoneNumber });
-
-      return {
-        user: {
-          name,
-          lastName,
-          email: user.email,
-          phoneNumber,
-        },
-        token: user.uid,
-      };
-    } catch (error) {
-      console.error("Registration error:", error.message); // Отладка
-      return thunkAPI.rejectWithValue(error.message); // Обработка ошибок
-    }
+// Логин через Email/Password
+export const loginWithEmail = (email, password) => async (dispatch) => {
+  dispatch(setLoading(true));
+  if (!email || !password) {
+    dispatch(setError("Email and password are required"));
+    dispatch(setLoading(false));
+    return;
   }
-);
-
-export const login = createAsyncThunk(
-  "auth/login",
-  async (credentials, thunkAPI) => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        credentials.email,
-        credentials.password
-      );
-      const user = userCredential.user;
-      return {
-        user: { name: user.displayName, email: user.email },
-        token: user.uid,
-      }; // Получаем токен (UID)
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    dispatch(setUser(userCredential.user));
+  } catch (error) {
+    dispatch(setError(error.message));
+  } finally {
+    dispatch(setLoading(false));
   }
-);
+};
 
-export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+// Регистрация через Email/Password
+export const registerWithEmail = (email, password) => async (dispatch) => {
+  dispatch(setLoading(true));
+
+  if (!email || !password) {
+    // Используем  для проверки
+    dispatch(setError("Email and password are required"));
+    dispatch(setLoading(false));
+    return;
+  }
+
+  try {
+    // Регистрируем пользователя с помощью email и password
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
+
+    // Создаем запись в Firestore с данными пользователя
+    await setDoc(doc(db, "users", user.uid), {
+      email: user.email,
+      displayName: "Default Name", // Можете изменить на имя пользователя
+      phoneNumber: "", // Можете добавить телефонный номер
+      // Добавьте любые другие поля, которые хотите сохранить в Firestore
+    });
+
+    // Диспатчим успешную регистрацию в Redux
+    dispatch(setUser(user));
+  } catch (error) {
+    dispatch(setError(`Registration Error: ${error.message}`)); // Исправил ошибку форматирования
+  } finally {
+    dispatch(setLoading(false));
+  }
+};
+
+// Логин через Google
+export const loginWithGoogle = () => async (dispatch) => {
+  dispatch(setLoading(true));
+  try {
+    const userCredential = await signInWithPopup(auth, googleProvider);
+    dispatch(setUser(userCredential.user));
+
+    // Дополнительно, сохраняем или обновляем данные в Firestore
+    await setDoc(doc(db, "users", userCredential.user.uid), {
+      email: userCredential.user.email,
+      displayName: userCredential.user.displayName || "Default Name",
+      phoneNumber: userCredential.user.phoneNumber || "",
+    });
+  } catch (error) {
+    dispatch(setError(error.message));
+  } finally {
+    dispatch(setLoading(false));
+  }
+};
+
+// Логин через GitHub
+export const loginWithGitHub = () => async (dispatch) => {
+  dispatch(setLoading(true));
+  try {
+    const userCredential = await signInWithPopup(auth, githubProvider);
+    dispatch(setUser(userCredential.user));
+
+    // Дополнительно, сохраняем или обновляем данные в Firestore
+    await setDoc(doc(db, "users", userCredential.user.uid), {
+      email: userCredential.user.email,
+      displayName: userCredential.user.displayName || "Default Name",
+      phoneNumber: userCredential.user.phoneNumber || "",
+    });
+  } catch (error) {
+    dispatch(setError(error.message));
+  } finally {
+    dispatch(setLoading(false));
+  }
+};
+
+// Логаут
+export const logout = () => async (dispatch) => {
+  dispatch(setLoading(true));
   try {
     await signOut(auth);
-    return {}; // Логинизация не требуется, просто очищаем токен и состояние
+    dispatch(clearUser());
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+    dispatch(setError(error.message));
+  } finally {
+    dispatch(setLoading(false));
   }
-});
-
-export const refreshUser = createAsyncThunk(
-  "auth/refresh",
-  async (_, thunkAPI) => {
-    try {
-      return new Promise((resolve, reject) => {
-        onAuthStateChanged(auth, (user) => {
-          if (user) {
-            resolve({
-              user: { name: user.displayName, email: user.email },
-              token: user.uid,
-            });
-          } else {
-            reject("No user found");
-          }
-        });
-      });
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+};

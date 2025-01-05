@@ -2,8 +2,8 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import css from "./SignInMainForm.module.css";
 import { useDispatch } from "react-redux";
-import { login } from "../../../../redux/Auth/operations";
-import { Link } from "react-router-dom";
+import { loginWithEmail } from "../../../../redux/Auth/operations";
+import { Link, useNavigate } from "react-router-dom";
 
 const validationSchema = yup.object({
   email: yup
@@ -18,56 +18,66 @@ const validationSchema = yup.object({
 
 const SignInMainForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const { email, password } = values;
+        await dispatch(loginWithEmail(email, password));
+        navigate("/");
+        resetForm();
+      } catch (error) {
+        console.error("Login failed:", error);
+        alert("Invalid credentials. Please try again.");
+      }
     },
   });
-  const handleSubmit = (values, { resetForm }) => {
-    dispatch(login(values));
-    resetForm();
-  };
 
   return (
     <div className={css.containerForm}>
-      <form className={css.form} onSubmit={handleSubmit}>
+      <form className={css.form} onSubmit={formik.handleSubmit}>
         <input
           className={css.input}
           id="email"
           name="email"
-          label="Email"
+          type="email"
           value={formik.values.email}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           placeholder="Email"
-          required
         />
+        {formik.touched.email && formik.errors.email ? (
+          <div className={css.error}>{formik.errors.email}</div>
+        ) : null}
+
         <input
           className={css.input}
           id="password"
           name="password"
-          label="Password"
           type="password"
           value={formik.values.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           placeholder="Password"
-          required
         />
+        {formik.touched.password && formik.errors.password ? (
+          <div className={css.error}>{formik.errors.password}</div>
+        ) : null}
+
         <button className={css.button} type="submit">
           Submit
         </button>
-        <button className={css.button} type="button">
-          <Link to="/signup" className={css.Link}>
-            {" "}
+        <Link to="/signup" className={css.link}>
+          <button className={css.button} type="button">
             Registration Now
-          </Link>
-        </button>
+          </button>
+        </Link>
       </form>
     </div>
   );

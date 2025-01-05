@@ -1,17 +1,3 @@
-// firebase.js
-import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-  updateProfile,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-
 // Конфигурация Firebase из переменных окружения
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -23,22 +9,4 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
-// Инициализация Firebase
-const app = initializeApp(firebaseConfig);
-
-// Получение сервисов
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-// Экспорт функций и объектов
-export {
-  auth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-  updateProfile,
-  GoogleAuthProvider,
-  signInWithPopup,
-  db,
-};
+export default firebaseConfig;
