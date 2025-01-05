@@ -4,6 +4,7 @@ import css from "./SignInMainForm.module.css";
 import { useDispatch } from "react-redux";
 import { loginWithEmail } from "../../../../redux/Auth/operations";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const validationSchema = yup.object({
   email: yup
@@ -19,6 +20,7 @@ const validationSchema = yup.object({
 const SignInMainForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -38,6 +40,9 @@ const SignInMainForm = () => {
       }
     },
   });
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
 
   return (
     <div className={css.containerForm}>
@@ -56,16 +61,27 @@ const SignInMainForm = () => {
           <div className={css.error}>{formik.errors.email}</div>
         ) : null}
 
-        <input
-          className={css.input}
-          id="password"
-          name="password"
-          type="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          placeholder="Password"
-        />
+        <div className={css.passwordWrapper}>
+          <input
+            className={css.input}
+            id="password"
+            name="password"
+            type={showPassword ? "text" : "password"} // Если showPassword true, показываем пароль
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder="Password"
+          />
+          {/* Иконка глаза для отображения/скрытия пароля */}
+          <span
+            className={css.eyeIcon}
+            onClick={togglePasswordVisibility}
+            role="button"
+            aria-label="Toggle password visibility"
+          >
+            {showPassword ? "👁️" : "🙈"}
+          </span>
+        </div>
         {formik.touched.password && formik.errors.password ? (
           <div className={css.error}>{formik.errors.password}</div>
         ) : null}

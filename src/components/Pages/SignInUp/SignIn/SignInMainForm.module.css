@@ -3,17 +3,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
 }
 
 .input {
     border: none;
     border-bottom: 2px solid #ccc;
-    padding: 5px;
+    padding: 10px 5px;
     outline: none;
     width: 100%;
     font-size: 16px;
     margin-bottom: 44px;
+
+
 }
 
 .input::placeholder {
@@ -27,7 +28,6 @@
 
 .input:focus {
     border-bottom: 2px solid #4285f4;
-
 }
 
 .button {
@@ -62,4 +62,21 @@
 .Link {
     text-decoration: none;
     color: inherit;
+}
+
+.passwordWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.eyeIcon {
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+
 }
