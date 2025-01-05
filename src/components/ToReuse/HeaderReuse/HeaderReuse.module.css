@@ -1,9 +1,18 @@
 .header {
-  display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 10px;
   background-color: #ffffff;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 320px;
+  padding-top: 35px;
+  padding-bottom: 47px;
+  padding-left: 16px;
+  padding-right: 16px;
+  box-sizing: border-box;
 }
 
 .logoLink {
@@ -129,14 +138,23 @@
 }
 
 @media (min-width: 768px) {
-  .header {
-    padding: 50px 15px;
+  .container {
+    max-width: 768px;
+    padding-top: 55px;
+    padding-bottom: 70px;
   }
 }
 
 @media (min-width: 1280px) {
-  .header {
-    padding: 70px 0px;
+  .container {
+    text-align: center;
+    max-width: 1280px;
+    padding-top: 70px;
+    padding-bottom: 94px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 

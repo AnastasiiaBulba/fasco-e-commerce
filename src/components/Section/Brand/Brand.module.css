@@ -1,12 +1,10 @@
 .brand {
   display: flex;
-  justify-content: center;
   align-items: center;
   height: 150px;
 }
 
 .brandCarousel {
-  width: 100%;
   overflow: hidden;
   position: relative;
 }
@@ -44,12 +42,6 @@
     margin: 0 20px;
   }
 }
-/* .brand {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-}
 
 .brandCarousel {
   width: 100%;
@@ -67,4 +59,4 @@
   width: 196px;
   object-fit: contain;
   margin: 0 20px;
-} */
+}

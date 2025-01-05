@@ -53,7 +53,7 @@ const BrandCarousel = () => {
   ];
 
   return (
-    <section className={css.brandCarousel}>
+    <div className={css.brandCarousel}>
       <div
         className={css.brandTrack}
         style={{
@@ -71,7 +71,7 @@ const BrandCarousel = () => {
           />
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

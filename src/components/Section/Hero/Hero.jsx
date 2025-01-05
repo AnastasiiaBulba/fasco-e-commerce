@@ -12,55 +12,57 @@ const Hero = () => {
   return (
     <>
       <section className={css.hero}>
-        <div className={css.heroLeft}>
-          <img
-            src={heroLeft1x}
-            srcSet={`
-            ${heroLeft1x} 1x, 
-            ${heroLeft2x} 2x`}
-            alt="men's clothing full image"
-            className={css.heroLeftImg}
-          />
-        </div>
-        <div className={css.heroCenter}>
-          <div className={css.heroCenterTop}>
+        <div className={css.container}>
+          <div className={css.heroLeft}>
             <img
-              src={heroCenterTop1x}
+              src={heroLeft1x}
               srcSet={`
-                ${heroCenterTop1x} 1x,
-                ${heroCenterTop2x} 2x`}
-              alt="women's clothing collection at discounts"
-              className={css.heroCenterTopImg}
+              ${heroLeft1x} 1x, 
+              ${heroLeft2x} 2x`}
+              alt="men's clothing full image"
+              className={css.heroLeftImg}
             />
           </div>
-          <div className={css.heroCenterCenter}>
-            <p className={css.heroParagraphOne}>ULTIMATE</p>
-            <h2 className={css.heroTitle}>SALE</h2>
-            <p className={css.heroParagraphTwo}>NEW COLLECTION</p>
-            <button className={css.heroBtn}>SHOP NOW</button>
+          <div className={css.heroCenter}>
+            <div className={css.heroCenterTop}>
+              <img
+                src={heroCenterTop1x}
+                srcSet={`
+                  ${heroCenterTop1x} 1x,
+                  ${heroCenterTop2x} 2x`}
+                alt="women's clothing collection at discounts"
+                className={css.heroCenterTopImg}
+              />
+            </div>
+            <div className={css.heroCenterCenter}>
+              <p className={css.heroParagraphOne}>ULTIMATE</p>
+              <h2 className={css.heroTitle}>SALE</h2>
+              <p className={css.heroParagraphTwo}>NEW COLLECTION</p>
+              <button className={css.heroBtn}>SHOP NOW</button>
+            </div>
+            <div className={css.heroCenterBottom}>
+              <img
+                src={heroCenterBottom1x}
+                srcSet={`
+                  ${heroCenterBottom1x} 1x,
+                  ${heroCenterBottom2x} 2x
+                `}
+                alt="women's clothing collection at discounts"
+                className={css.heroCenterBottomImg}
+              />
+            </div>
           </div>
-          <div className={css.heroCenterBottom}>
+          <div className={css.heroRight}>
             <img
-              src={heroCenterBottom1x}
+              src={heroRight1x}
               srcSet={`
-                ${heroCenterBottom1x} 1x,
-                ${heroCenterBottom2x} 2x
+                ${heroRight1x} 1x,
+                ${heroRight2x} 2x
               `}
-              alt="women's clothing collection at discounts"
-              className={css.heroCenterBottomImg}
+              alt="men's clothing full image"
+              className={css.heroRightImg}
             />
           </div>
-        </div>
-        <div className={css.heroRight}>
-          <img
-            src={heroRight1x}
-            srcSet={`
-              ${heroRight1x} 1x,
-              ${heroRight2x} 2x
-            `}
-            alt="men's clothing full image"
-            className={css.heroRightImg}
-          />
         </div>
       </section>
     </>
