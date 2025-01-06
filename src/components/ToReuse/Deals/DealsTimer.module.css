@@ -6,29 +6,80 @@
 .p {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
-  font-size: 28px;
+  /* font-size: 28px; */
+  font-size: 20px;
   color: #484848;
+  padding-bottom: 15px;
 }
 
 .timer {
+  display: flex;
+  /* gap: 30px; */
+  gap: 16px;
 }
 
 .numberWrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 .number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: "Digital Numbers", sans-serif;
   font-weight: 400;
-  font-size: 32px;
+  /* font-size: 32px; */
+  font-size: 28px;
   line-height: 1;
   color: #484848;
+  border-radius: 10px;
+  /* width: 76px;
+  height: 76px; */
+  width: 56px;
+  height: 56px;
+  box-shadow: 0 4px 14px 1px rgba(0, 0, 0, 0.16);
+  background: #fff;
+  margin-bottom: 8px;
 }
 
 .signature {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
-  font-size: 24px;
+  /* font-size: 24px; */
+  font-size: 16px;
   line-height: 1.2;
   text-align: center;
   color: #484848;
+}
+
+@media (min-width: 768px) {
+  .p {
+    font-size: 24px;
+  }
+
+  .timer {
+    gap: 20px;
+  }
+
+  .number {
+    font-size: 32px;
+    width: 76px;
+    height: 76px;
+    margin-bottom: 15px;
+  }
+
+  .signature {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .timer {
+    gap: 30px;
+  }
+
+  .p {
+    font-size: 28px;
+  }
 }

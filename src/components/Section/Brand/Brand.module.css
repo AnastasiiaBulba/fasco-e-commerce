@@ -1,7 +1,8 @@
 .brand {
   display: flex;
   align-items: center;
-  height: 150px;
+  padding-top: 42px;
+  padding-bottom: 42px;
 }
 
 .brandCarousel {
@@ -23,7 +24,8 @@
 
 @media (min-width: 768px) {
   .brand {
-    height: 175px;
+    padding-top: 62px;
+    padding-bottom: 62px;
   }
 
   .brandImg {
@@ -34,7 +36,8 @@
 
 @media (min-width: 1280px) {
   .brand {
-    height: 200px;
+    padding-top: 82px;
+    padding-bottom: 82px;
   }
 
   .brandImg {

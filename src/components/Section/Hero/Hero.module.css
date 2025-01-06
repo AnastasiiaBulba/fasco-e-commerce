@@ -81,8 +81,10 @@
   color: #ffffff;
   outline: none;
   border: none;
-  width: 207px;
-  height: 56px;
+  /* width: 207px;
+  height: 56px; */
+  width: 157px;
+  height: 40px;
   cursor: pointer;
   border-radius: 10px;
   box-shadow: 0 20px 35px 0 rgba(0, 0, 0, 0.15);
@@ -90,6 +92,7 @@
   position: relative;
   overflow: hidden;
   z-index: 1;
+  margin-bottom: 8px;
 }
 
 .heroBtn::before {
@@ -154,6 +157,11 @@
     flex-direction: column;
     justify-content: space-between;
     /* margin-left: 20px; */
+  }
+
+  .heroBtn {
+    width: 207px;
+    height: 56px;
   }
 
   .heroCenterTop,
