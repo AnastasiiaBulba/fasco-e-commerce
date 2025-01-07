@@ -1,5 +1,13 @@
+import HeaderReuse from "../../components/ToReuse/HeaderReuse/HeaderReuse";
+import Shop from "../../components/Pages/Shop/Shop";
+
 const ShopPage = () => {
-  return <h2>Shop Page</h2>;
+  return (
+    <>
+      <HeaderReuse />
+      <Shop />
+    </>
+  );
 };
 
 export default ShopPage;

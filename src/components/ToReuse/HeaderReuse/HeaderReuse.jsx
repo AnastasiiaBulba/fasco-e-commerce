@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
-
+/*
+import { AiOutlineSearch, AiOutlineHeart } from "react-icons/ai";
+import { FaShoppingCart } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";*/
 import { useSelector } from "react-redux";
 import css from "./HeaderReuse.module.css";
 import BurgerMenu from "../../BurgerMenu/BurgerMenu";
+import HeaderAuth from "./HeaderAuth";
 
 const HeaderReuse = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -56,20 +60,7 @@ const HeaderReuse = () => {
               </Link>
             </>
           ) : (
-            <>
-              <Link to="/shop" className={css.navItem}>
-                Shop
-              </Link>
-              <Link to="/products" className={css.navItem}>
-                Products
-              </Link>
-              <Link to="/pages" className={css.navItem}>
-                Pages
-              </Link>
-              <Link to="/logout" className={css.navItemBtn}>
-                Logout
-              </Link>
-            </>
+            <HeaderAuth />
           )}
         </nav>
 

@@ -1,0 +1,85 @@
+.RightContainer {}
+
+.containerFilter {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdownBtn {
+    padding: 10px 20px;
+    font-family: "Volkhov", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.dropdownContent {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    min-width: 150px;
+    z-index: 1000;
+}
+
+.dropdownContent li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdownContent li:hover {
+    background-color: #f0f0f0;
+}
+
+.dropdown:hover .dropdownContent {
+    display: block;
+}
+
+
+.iconsList {
+    display: flex;
+    gap: 10px;
+}
+
+.iconsList li {
+    padding: 10px;
+    display: flex;
+    background: #f2f2f2;
+    color: aqua;
+    border-radius: 5px;
+    align-items: center;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.icon {
+    fill: #000;
+    width: 20px;
+    height: 20px;
+    transition: fill 0.3s ease;
+
+}
+
+.iconsList li .icon:hover {
+    fill: #007bff;
+
+}
+
+
+.containerProducts {
+    border: 1px, solid #007bff;
+    height: 400px;
+}

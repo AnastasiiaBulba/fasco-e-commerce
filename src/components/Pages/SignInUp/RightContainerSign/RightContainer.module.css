@@ -27,6 +27,7 @@
     letter-spacing: 0.08em;
     color: #838383;
     margin-bottom: 50px;
+    text-align: center;
 }
 
 .forgotPassword {
@@ -50,6 +51,7 @@
     color: #5b86e5;
     display: block;
     cursor: pointer;
+    text-align: right;
 }
 
 .LinkHome {
