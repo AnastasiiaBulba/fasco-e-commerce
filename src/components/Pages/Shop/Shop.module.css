@@ -1,0 +1,37 @@
+.container {
+    max-width: 1281px;
+    padding: 0 32px;
+    margin: 0 auto;
+
+
+
+}
+
+.containerShop {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 31px;
+    grid-auto-flow: row;
+}
+
+.title {
+    font-family: "Volkhov", sans-serif;
+    font-weight: 400;
+    font-size: 42px;
+    line-height: 76%;
+    text-transform: capitalize;
+    text-align: center;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.breadcrumbs {
+    font-family: "Jost",
+        sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    color: #000;
+    margin-bottom: 100px;
+}
