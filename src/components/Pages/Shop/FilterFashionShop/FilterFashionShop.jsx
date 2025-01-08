@@ -53,6 +53,10 @@ const FilterFashionShop = () => {
           ></li>
           <li
             className={css.colorItem}
+            style={{ backgroundColor: "rgb(173, 3, 176)" }}
+          ></li>
+          <li
+            className={css.colorItem}
             style={{ backgroundColor: "gray" }}
           ></li>
           <li
@@ -66,6 +70,11 @@ const FilterFashionShop = () => {
           <li
             className={css.colorItem}
             style={{ backgroundColor: "cyan" }}
+          ></li>
+
+          <li
+            className={css.colorItem}
+            style={{ backgroundColor: "rgb(43, 7, 127)" }}
           ></li>
         </ul>
       </div>

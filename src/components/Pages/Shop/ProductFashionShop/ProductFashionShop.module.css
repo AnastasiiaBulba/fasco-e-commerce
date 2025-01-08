@@ -1,8 +1,7 @@
-.RightContainer {}
-
 .containerFilter {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 24px;
 }
 
 .dropdown {
@@ -76,10 +75,4 @@
 .iconsList li .icon:hover {
     fill: #007bff;
 
-}
-
-
-.containerProducts {
-    border: 1px, solid #007bff;
-    height: 400px;
 }
