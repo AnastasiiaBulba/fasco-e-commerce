@@ -1,5 +1,6 @@
 import css from "./ProductFashionShop.module.css";
 import sprite from "../../../../assets/icons/sprite.svg";
+import ProductList from "../ProductsList/ProductsList";
 
 const ProductFashionShop = () => {
   return (
@@ -41,7 +42,9 @@ const ProductFashionShop = () => {
           </li>
         </ul>
       </div>
-      <div className={css.containerProducts}></div>
+      <div className={css.containerProducts}>
+        <ProductList />
+      </div>
     </div>
   );
 };

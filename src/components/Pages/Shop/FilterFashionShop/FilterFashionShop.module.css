@@ -60,8 +60,8 @@
 .colorItem {
     border-radius: 9999px;
     padding: 5px;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
 
